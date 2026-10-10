@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>N-Qubit Bloch Sphere Simulator</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzYjM0NjYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNzE0MzAiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9InNwIiBjeD0iLjM1IiBjeT0iLjMiIHI9Ii44Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM4ZjdkZTAiIHN0b3Atb3BhY2l0eT0iLjc1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMmEyNTUyIiBzdG9wLW9wYWNpdHk9Ii4zNSIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0idmMiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNlN2I5ZDQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2JnKSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNjgiIHI9IjE3MCIgZmlsbD0idXJsKCNzcCkiIHN0cm9rZT0iI2I5YTdlZiIgc3Ryb2tlLXdpZHRoPSI3Ii8+CjxlbGxpcHNlIGN4PSIyNTYiIGN5PSIyNjgiIHJ4PSIxNzAiIHJ5PSI1OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjlhN2VmIiBzdHJva2Utd2lkdGg9IjciLz4KPGVsbGlwc2UgY3g9IjI1NiIgY3k9IjI2OCIgcng9IjYyIiByeT0iMTcwIiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWE3ZWYiIHN0cm9rZS1vcGFjaXR5PSIuNSIgc3Ryb2tlLXdpZHRoPSI1Ii8+CjxsaW5lIHgxPSIyNTYiIHkxPSI3NiIgeDI9IjI1NiIgeTI9IjQ2MCIgc3Ryb2tlPSIjNmZiM2ZmIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1vcGFjaXR5PSIuNyIvPgo8cGF0aCBkPSJNMjU2IDI2OCBMMzUyIDE1MCIgc3Ryb2tlPSIjZTdiOWQ0IiBzdHJva2Utb3BhY2l0eT0iLjU1IiBzdHJva2Utd2lkdGg9IjIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTI1NiAyNjggTDM1MiAxNTAiIHN0cm9rZT0idXJsKCN2YykiIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8Y2lyY2xlIGN4PSIzNTIiIGN5PSIxNTAiIHI9IjIxIiBmaWxsPSIjZTdiOWQ0IiBmaWxsLW9wYWNpdHk9Ii40Ii8+CjxjaXJjbGUgY3g9IjM1MiIgY3k9IjE1MCIgcj0iMTMiIGZpbGw9IiNmZmYiLz4KPGNpcmNsZSBjeD0iMjU2IiBjeT0iMjY4IiByPSI5IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPgo=">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f5efe3">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--page:#f5efe3;--text:#3d352c;--field:#fffaf0;--border:#d8c9b4;--card:#eadcc8;--accent:#8b5e3c;--sel:#fff4df;--head:#d9a441}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(900px 500px at 75% -10%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%),var(--page);color:var(--text);font:14px/1.5 'Instrument Sans',system-ui,sans-serif;padding:18px clamp(12px,3vw,36px) 34px;font-variant-numeric:tabular-nums;transition:background .5s,color .5s}
+.brand{display:flex;align-items:center;gap:14px}.brand img{border-radius:14px;box-shadow:0 6px 24px color-mix(in srgb,var(--accent) 35%,transparent)}
+h1{font:800 clamp(24px,3.6vw,40px)/1.05 Syne,sans-serif;letter-spacing:-.02em}
+.sub{color:var(--accent);font-size:13px;margin:4px 0 16px}
+h2{font:700 12px Syne,sans-serif;color:var(--accent);letter-spacing:.06em;margin:14px 0 8px}h2:first-child{margin-top:0}
+.grid{display:grid;grid-template-columns:320px minmax(0,1fr) 310px;gap:14px;align-items:start}
+.box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;transition:background .5s,border-color .5s}
+button,select,input{font:inherit;color:inherit}
+button{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;transition:transform .15s,background .2s,border-color .2s}
+button:hover{background:var(--sel);border-color:var(--accent)}button:active{transform:scale(.94)}
+button.fired{animation:pop .5s}@keyframes pop{from{box-shadow:0 0 0 0 var(--accent)}to{box-shadow:0 0 0 14px transparent}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text],select{background:var(--field);border:1px solid var(--border);border-radius:7px;padding:5px 8px;min-width:0;max-width:100%}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.row>label{color:var(--accent)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.tabs button{border-radius:8px 8px 0 0;border-bottom:0;padding:7px 12px}.tabs button.on{background:var(--sel);border-color:var(--accent)}
+.pane{display:none}.pane.on{display:block;animation:fi .35s}@keyframes fi{from{opacity:0;transform:translateY(5px)}}
+.stage{position:relative;padding:6px;background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--accent) 16%,var(--card)),var(--card) 72%)}
+canvas{width:100%;aspect-ratio:1;display:block;cursor:grab;touch-action:none}
+.toast{position:absolute;left:14px;top:12px;opacity:0;transition:opacity .4s;color:var(--accent)}.toast.on{opacity:1}
+.fz{position:absolute;right:12px;top:10px;z-index:2;font-weight:600}.fz.off{background:var(--sel);border-color:var(--accent)}
+.hint{position:absolute;right:14px;bottom:10px;font-size:12px;color:var(--accent);opacity:.8}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px}.kv>:nth-child(even){text-align:right}.kv>:nth-child(odd){color:var(--accent)}
+.note{margin-top:10px;padding:9px;border-radius:9px;background:var(--field);font-size:13px;word-break:break-word}
+.st{margin-top:8px;font-size:13px;min-height:20px}
+details{margin-top:12px;font-size:13px}summary{cursor:pointer;color:var(--accent);font-weight:600}
+.scr{overflow:auto;max-height:440px;border:1px solid var(--border);border-radius:9px}.scr.s{max-height:230px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{position:sticky;top:0;background:var(--head);color:var(--page);padding:6px 8px;text-align:left;font-weight:600;z-index:1}
+td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top}tr:nth-child(even) td{background:color-mix(in srgb,var(--card) 60%,transparent)}
+td[contenteditable]{min-width:70px;outline-offset:-2px}td[contenteditable]:focus{background:var(--sel)}
+td input{width:100%;background:var(--field);border:1px solid var(--border);border-radius:6px;padding:3px 6px}
+pre{font:13px/1.55 'Instrument Sans',monospace;white-space:pre-wrap;word-break:break-word;background:var(--field);border-radius:9px;padding:12px;max-height:440px;overflow:auto}
+.pb{display:grid;grid-template-columns:70px 1fr 60px;gap:10px;align-items:center;margin:4px 0}
+.pb i{height:12px;border-radius:6px;background:var(--field);overflow:hidden;display:block}
+.pb b{display:block;height:100%;border-radius:6px;width:var(--w);animation:grow .8s cubic-bezier(.2,.8,.2,1)}@keyframes grow{from{width:0}}
+.pb em{font-style:normal;text-align:right}
+.dm{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px}.dm div{background:var(--field);border-radius:9px;padding:12px;text-align:center}
+.b{margin-top:14px}.bt{display:flex;flex-wrap:wrap;gap:6px}
+@media(max-width:1100px){.grid{grid-template-columns:1fr}.stage{order:-1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="brand"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzYjM0NjYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNzE0MzAiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9InNwIiBjeD0iLjM1IiBjeT0iLjMiIHI9Ii44Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM4ZjdkZTAiIHN0b3Atb3BhY2l0eT0iLjc1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMmEyNTUyIiBzdG9wLW9wYWNpdHk9Ii4zNSIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0idmMiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNlN2I5ZDQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2JnKSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNjgiIHI9IjE3MCIgZmlsbD0idXJsKCNzcCkiIHN0cm9rZT0iI2I5YTdlZiIgc3Ryb2tlLXdpZHRoPSI3Ii8+CjxlbGxpcHNlIGN4PSIyNTYiIGN5PSIyNjgiIHJ4PSIxNzAiIHJ5PSI1OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjlhN2VmIiBzdHJva2Utd2lkdGg9IjciLz4KPGVsbGlwc2UgY3g9IjI1NiIgY3k9IjI2OCIgcng9IjYyIiByeT0iMTcwIiBmaWxsPSJub25lIiBzdHJva2U9IiNiOWE3ZWYiIHN0cm9rZS1vcGFjaXR5PSIuNSIgc3Ryb2tlLXdpZHRoPSI1Ii8+CjxsaW5lIHgxPSIyNTYiIHkxPSI3NiIgeDI9IjI1NiIgeTI9IjQ2MCIgc3Ryb2tlPSIjNmZiM2ZmIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1vcGFjaXR5PSIuNyIvPgo8cGF0aCBkPSJNMjU2IDI2OCBMMzUyIDE1MCIgc3Ryb2tlPSIjZTdiOWQ0IiBzdHJva2Utb3BhY2l0eT0iLjU1IiBzdHJva2Utd2lkdGg9IjIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTI1NiAyNjggTDM1MiAxNTAiIHN0cm9rZT0idXJsKCN2YykiIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8Y2lyY2xlIGN4PSIzNTIiIGN5PSIxNTAiIHI9IjIxIiBmaWxsPSIjZTdiOWQ0IiBmaWxsLW9wYWNpdHk9Ii40Ii8+CjxjaXJjbGUgY3g9IjM1MiIgY3k9IjE1MCIgcj0iMTMiIGZpbGw9IiNmZmYiLz4KPGNpcmNsZSBjeD0iMjU2IiBjeT0iMjY4IiByPSI5IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPgo=" alt="Bloch sphere logo" width="56" height="56"><h1>N-Qubit Bloch Sphere Simulator</h1></div><div class="sub">Qubit Six · Q-SCIN · up to 12 qubits</div>
+<div class="grid">
+<section class="box">
+ <h2>INPUT</h2>
+ <div class="tabs" id="mt"><button class="on" data-m="0">Single Qubit</button><button data-m="1">n-Qubit State</button></div>
+ <div class="pane on" id="m0"><div class="row" style="margin:0"><label>α =</label><input id="al" type="text" value="1" size="14"></div>
+  <div class="row"><label>β =</label><input id="be" type="text" value="0" size="14"></div><div style="margin-top:8px;color:var(--accent);font-size:12px">|ψ⟩ = α|0⟩ + β|1⟩ (updates live)</div></div>
+ <div class="pane" id="m1"><div class="row" style="margin:0"><label>Number of qubits n:</label><input id="sp" type="number" min="1" max="12" value="1" style="width:64px;background:var(--field);border:1px solid var(--border);border-radius:7px;padding:5px"></div>
+  <div class="scr s" style="margin-top:8px"><table><thead><tr><th>Basis</th><th>Amplitude (a+bi)</th></tr></thead><tbody id="at"></tbody></table></div></div>
+ <div class="row"><span id="nl" style="flex:1">Norm = 1.000000</span><button id="nb">Normalize State</button></div>
+ <div class="st" id="us"></div>
+ <h2>SELECT QUBIT</h2><select id="qs" style="width:100%"></select>
+ <h2>PRESETS</h2><div class="g3" id="pr"></div>
+</section>
+<section class="box stage"><canvas id="cv" aria-label="Bloch sphere"></canvas><button class="fz" id="fz" title="Freeze rotation and vector motion">⏸ Stop animation</button><div class="toast" id="ts"></div><div class="hint">drag to rotate · scroll to zoom</div></section>
+<section class="box"><h2>VALUES</h2><div class="kv" id="kv"></div><div class="note" id="sn"></div><div class="st" id="inf"></div>
+ <details><summary>What am I seeing?</summary><p style="margin-top:8px">The Bloch sphere is a geometric picture of a single qubit. For an n-qubit system each selected qubit is shown through its <b>reduced density matrix</b> (partial trace over all other qubits), so you see the local state of that qubit while the full state remains a 2<sup>n</sup>-dimensional vector.<br><br>• <b>Surface</b> → pure qubit state<br>• <b>Inside</b> → mixed reduced state<br>• <b>Center</b> → maximally mixed qubit<br><br>Qubit order: Q0 is the leftmost bit of a basis label.</p></details></section>
+</div>
+<section class="box b"><div class="tabs" id="bt"></div>
+<div class="pane on" id="t0"><div class="scr"><table><thead><tr><th>Basis</th><th>Real</th><th>Imaginary</th><th>Magnitude</th><th>Probability</th></tr></thead><tbody id="sv"></tbody></table></div></div>
+<div class="pane" id="t1"><div id="dm"></div></div>
+<div class="pane" id="t2"><div id="pb"></div></div>
+<div class="pane" id="t3"><div class="scr"><table><thead><tr><th>Qubit</th><th>X</th><th>Y</th><th>Z</th><th>|r|</th><th>Purity</th></tr></thead><tbody id="bc"></tbody></table></div></div>
+<div class="pane" id="t4"><pre id="gc"></pre></div>
+<div class="pane" id="t5"><div class="tabs" id="wt"></div><div id="wp"></div></div>
+<div class="pane" id="t6">
+ <div class="row" style="margin:0"><label>Target qubit:</label><select id="tg"></select><label>Control (CNOT/SWAP):</label><select id="ct"></select><label>Angle (π/4 or 45°):</label><input id="an" type="text" value="pi/4" size="8"></div>
+ <div class="bt" id="gb" style="margin-top:10px"></div>
+ <div class="row"><label><input type="checkbox" id="ao" checked> Animation</label><label><input type="checkbox" id="rm"> Reduce motion</label><label>Speed:</label><select id="sd"><option>Slow</option><option selected>Normal</option><option>Fast</option></select><label>Theme:</label><select id="th"></select></div>
+ <div class="bt" style="margin-top:12px" id="ab"></div><pre id="sc" style="margin-top:12px;display:none"></pre><input type="file" id="lf" accept=".json" hidden></div>
+</section>
+<script>
+const $=s=>document.querySelector(s),PI=Math.PI,R2=Math.SQRT1_2,MAXQ=12,SPD={Slow:70,Normal:32,Fast:12};
+const TH={"Warm Paper":["#f5efe3","#3d352c","#fffaf0","#d8c9b4","#eadcc8","#8b5e3c","#fff4df","#d9a441"],"Ocean Blue":["#102a43","#e6f1f5","#0b2033","#28516b","#173b52","#73b7c9","#1e4f68","#e7b35a"],"Forest Desk":["#20352c","#edf1df","#17271f","#496652","#2d4737","#a5c98b","#385b44","#e4b66a"],"Sunset Notebook":["#3c2630","#fff0df","#2a1c25","#704653","#52313e","#e5a477","#784654","#f1c27d"],"Lavender Ink":["#29253d","#f1edff","#1d1a2d","#514a70","#37314f","#b9a7ef","#5d4f89","#e7b9d4"]};
+let frozen=0,T=TH["Warm Paper"],S,sel=0,cur=[0,0,0],tv=[0,0,1],anim=null,trail=[],yaw=-.9,pitch=.4,zoom=1,drag=0,ov={},pur=1,debT;
+class SE extends Error{}
+/* ---------- parsing ---------- */
+function pc(t){if(typeof t==='number')return[t,0];let s=String(t).trim().replace(/\s/g,'').replace(/−/g,'-').replace(/√/g,'sqrt').replace(/π/g,'pi').replace(/j/gi,'i').toLowerCase(),p=0;
+ if(!s)throw new SE('Empty amplitude: enter a number such as 0.7071 or 0.5-0.5i.');
+ const mu=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]],dv=(a,b)=>{const d=b[0]**2+b[1]**2;if(!d)throw 0;return[(a[0]*b[0]+a[1]*b[1])/d,(a[1]*b[0]-a[0]*b[1])/d]};
+ function ex(){let v=tm();while(s[p]=='+'||s[p]=='-'){const o=s[p++],w=tm();v=[v[0]+(o=='+'?w[0]:-w[0]),v[1]+(o=='+'?w[1]:-w[1])]}return v}
+ function tm(){let v=fc();for(;;){if(s[p]=='*'){p++;v=mu(v,fc())}else if(s[p]=='/'){p++;v=dv(v,fc())}else return v}}
+ function fc(){if(s[p]=='-'){p++;const v=fc();return[-v[0],-v[1]]}if(s[p]=='+'){p++;return fc()}
+  if(s[p]=='('){p++;const v=ex();if(s[p++]!=')')throw 0;return v}
+  const r=s.slice(p);let m;
+  if(m=r.match(/^(\d+\.?\d*|\.\d+)(e[+-]?\d+)?/)){p+=m[0].length;if(s[p]=='i'){p++;return[0,+m[0]]}return[+m[0],0]}
+  if(r.startsWith('sqrt(')){p+=5;const v=ex();if(s[p++]!=')')throw 0;const q=Math.hypot(...v),a=Math.sqrt((q+v[0])/2),b=Math.sqrt((q-v[0])/2);return[a,v[1]<0?-b:b]}
+  if(r.startsWith('pi')){p+=2;return[PI,0]}if(r[0]=='i'){p++;return[0,1]}if(r[0]=='e'){p++;return[Math.E,0]}throw 0}
+ try{const v=ex();if(p!=s.length||!isFinite(v[0])||!isFinite(v[1]))throw 0;return v}catch(e){throw new SE(`Invalid complex number: '${t}'. Use forms like 0.7071, 0.5-0.5i or 1/sqrt(2).`)}}
+function pa(t){let s=String(t).toLowerCase().replace(/π/g,'pi').replace(/°/g,'deg').replace(/\s/g,'');const d=/deg(rees?)?$/.test(s);s=s.replace(/deg(rees?)?$/,'').replace(/(\d)pi/g,'$1*pi');
+ try{if(!/^[0-9pi+\-*/().e]+$/.test(s))throw 0;const v=Function('pi','return '+s)(PI);if(!isFinite(v))throw 0;return d?v*PI/180:v}catch(e){throw new SE(`Invalid gate angle '${t}'. Try pi/4, 45° or 0.785.`)}}
+const g=(x,p)=>+x.toPrecision(p)+0,fc=(r,i,p=8)=>`${g(r,p)}${i<0?'-':'+'}${g(Math.abs(i),p)}i`;
+function pif(v){if(Math.abs(v)<1e-10)return'0';let b=null;for(let q=1;q<=24;q++){const p=Math.round(v/PI*q),e=Math.abs(v/PI-p/q);if(!b||e<b.e-1e-12)b={p,q,e}}
+ if(Math.abs(v-b.p/b.q*PI)>1e-5)return v.toFixed(6);const gc=(a,b)=>b?gc(b,a%b):a,d=gc(Math.abs(b.p),b.q),p=b.p/d,q=b.q/d;return q==1?(p==1?'π':p+'π'):p==1?'π/'+q:p+'π/'+q}
+const fa=v=>`${v.toFixed(6)} (${pif(v)})`;
+/* ---------- quantum ---------- */
+const lab=n=>Array.from({length:1<<n},(_,i)=>i.toString(2).padStart(n,'0'));
+function mk(r,i){const N=r.length;if(N<2||(N&(N-1)))throw new SE(`Invalid quantum state. Number of amplitudes must be a power of two (got ${N}).`);
+ const n=Math.log2(N);if(n>MAXQ)throw new SE(`Maximum simulated qubits is ${MAXQ}.`);let s=0;for(let k=0;k<N;k++){if(!isFinite(r[k]+i[k]))throw new SE('Amplitudes must be finite (no NaN/Infinity).');s+=r[k]**2+i[k]**2}
+ s=Math.sqrt(s);if(s<1e-12)throw new SE('Invalid quantum state: all amplitudes are zero.');return{n,re:Float64Array.from(r,v=>v/s),im:Float64Array.from(i,v=>v/s),norm:s}}
+const basis=(n,k=0)=>{const r=new Float64Array(1<<n);r[k]=1;return mk(r,new Float64Array(1<<n))};
+const GT={X:[0,0,1,0,1,0,0,0],Y:[0,0,0,-1,0,1,0,0],Z:[1,0,0,0,0,0,-1,0],H:[R2,0,R2,0,R2,0,-R2,0],S:[1,0,0,0,0,0,0,1],T:[1,0,0,0,0,0,Math.cos(PI/4),Math.sin(PI/4)]};
+const RT={Rx:t=>{const c=Math.cos(t/2),s=Math.sin(t/2);return[c,0,0,-s,0,-s,c,0]},Ry:t=>{const c=Math.cos(t/2),s=Math.sin(t/2);return[c,0,-s,0,s,0,c,0]},Rz:t=>{const c=Math.cos(t/2),s=Math.sin(t/2);return[c,-s,0,0,0,0,c,s]}};
+const chk=(s,k)=>{if(!Number.isInteger(k)||k<0||k>=s.n)throw new SE(`Invalid qubit index ${k}. Choose 0..${s.n-1}.`)};
+function ap1(s,U,k){chk(s,k);const re=Float64Array.from(s.re),im=Float64Array.from(s.im),b=1<<(s.n-1-k);
+ for(let i=0;i<re.length;i++){if(i&b)continue;const j=i|b,ar=s.re[i],ai=s.im[i],br=s.re[j],bi=s.im[j];
+  re[i]=U[0]*ar-U[1]*ai+U[2]*br-U[3]*bi;im[i]=U[0]*ai+U[1]*ar+U[2]*bi+U[3]*br;re[j]=U[4]*ar-U[5]*ai+U[6]*br-U[7]*bi;im[j]=U[4]*ai+U[5]*ar+U[6]*bi+U[7]*br}return mk(re,im)}
+function ap2(s,nm,c=0,t=1){if(s.n<2||c==t)throw new SE('A two-qubit gate needs two distinct qubits.');chk(s,c);chk(s,t);const cb=1<<(s.n-1-c),tb=1<<(s.n-1-t),re=new Float64Array(s.re.length),im=new Float64Array(s.re.length);
+ for(let i=0;i<re.length;i++){let m=i;if(nm=='CNOT'&&(i&cb))m=i^tb;if(nm=='SWAP'&&(!!(i&cb)!==!!(i&tb)))m=i^cb^tb;re[m]=s.re[i];im[m]=s.im[i]}return mk(re,im)}
+function bloch(s,k){const b=1<<(s.n-1-k);let a=0,d=0,cr=0,ci=0;for(let i=0;i<s.re.length;i++){if(i&b)continue;const j=i|b;a+=s.re[i]**2+s.im[i]**2;d+=s.re[j]**2+s.im[j]**2;cr+=s.re[i]*s.re[j]+s.im[i]*s.im[j];ci+=s.im[i]*s.re[j]-s.re[i]*s.im[j]}
+ return{v:[2*cr,-2*ci,a-d],p:a*a+d*d+2*(cr*cr+ci*ci),rho:[a,cr,ci,d]}}
+const P2=s=>Array.from(s.re,(r,i)=>r*r+s.im[i]**2);
+function sph(x,y,z){const r=Math.hypot(x,y,z);if(r<1e-12)return[0,0,0];return[r,Math.acos(Math.max(-1,Math.min(1,z/r)))*180/PI,Math.hypot(x,y)<1e-9?0:Math.atan2(y,x)*180/PI]}
+function expr(s,lim=32){const L=lab(s.n);let act=[];for(let i=0;i<s.re.length;i++)if(Math.hypot(s.re[i],s.im[i])>1e-10)act.push(i);const om=Math.max(0,act.length-lim);
+ if(om)act=act.sort((a,b)=>Math.hypot(s.re[b],s.im[b])-Math.hypot(s.re[a],s.im[a])).slice(0,lim).sort((a,b)=>a-b);if(!act.length)return'0';
+ let o=act.map((i,n)=>{let r=Math.abs(s.re[i])<1e-12?0:s.re[i],m=Math.abs(s.im[i])<1e-12?0:s.im[i],ng=m==0&&r<0;const t=`(${ng?fc(-r,-m,6):fc(r,m,6)})|${L[i]}⟩`;return n==0?(ng?'-'+t:t):`${ng?'-':'+'} ${t}`}).join(' ');
+ return o+(om?`\n… ${om} smaller basis amplitudes omitted`:'')}
+const SG={'|0⟩':[1,0,0,0],'|1⟩':[0,0,1,0],'|+⟩':[R2,0,R2,0],'|−⟩':[R2,0,-R2,0],'|+i⟩':[R2,0,0,R2],'|−i⟩':[R2,0,0,-R2]};
+function preset(nm){const n=S.n;
+ if(SG[nm]){const v=SG[nm];let r=[1],i=[0];for(let q=0;q<n;q++){const a=[],b=[];for(let x=0;x<r.length;x++)for(let y=0;y<2;y++){a.push(r[x]*v[2*y]-i[x]*v[2*y+1]);b.push(r[x]*v[2*y+1]+i[x]*v[2*y])}r=a;i=b}return mk(r,i)}
+ if(nm=='Random'){const N=1<<n,rn=()=>Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(2*PI*Math.random());return mk(Array.from({length:N},rn),Array.from({length:N},rn))}
+ if(nm=='Bell')return mk([R2,0,0,R2],[0,0,0,0]);const m=n>=2?n:3,r=new Float64Array(1<<m);
+ if(nm=='GHZ')r[0]=r[r.length-1]=R2;else for(let q=0;q<m;q++)r[1<<(m-1-q)]=1/Math.sqrt(m);return mk(r,new Float64Array(1<<m))}
+/* ---------- worksheet data ---------- */
+const WS1=[["|0⟩",[1,0],[0,0],"North pole / computational basis state"],["|1⟩",[0,0],[1,0],"South pole / computational basis state"],["|+⟩",[R2,0],[R2,0],"Equal real superposition"],["|−⟩",[R2,0],[-R2,0],"Equal superposition with a relative minus sign"],["|+i⟩",[R2,0],[0,R2],"Positive Y-axis eigenstate"],["|−i⟩",[R2,0],[0,-R2],"Negative Y-axis eigenstate"]];
+const gs=(th,ph)=>["",[Math.cos(th/2),0],[Math.sin(th/2)*Math.cos(ph),Math.sin(th/2)*Math.sin(ph)]];
+[[PI/3,PI/4,"θ=π/3, φ=π/4","Generic pure state"],[2*PI/3,PI,"θ=2π/3, φ=π","Generic pure state"],[PI/2,PI/3,"θ=π/2, φ=π/3","Equatorial state"],[PI/2,-PI/2,"θ=π/2, φ=−π/2","Negative Y-axis equatorial state"]].forEach(([a,b,l,r])=>{const x=gs(a,b);WS1.push([l,x[1],x[2],r])});
+const WS2=[["|00⟩",[1,0,0,0],[0,0,0,0]],["|01⟩",[0,1,0,0],0],["|10⟩",[0,0,1,0],0],["|11⟩",[0,0,0,1],0],["(|00⟩ + |11⟩)/√2",[R2,0,0,R2],0],["(|01⟩ + |10⟩)/√2",[0,R2,R2,0],0],["(|00⟩ + |01⟩ + |10⟩ + |11⟩)/2",[.5,.5,.5,.5],0],["(|00⟩ + i|11⟩)/√2",[R2,0,0,0],[0,0,0,R2]],["(|00⟩ − |11⟩)/√2",[R2,0,0,-R2],0],["(|01⟩ − i|10⟩)/√2",[0,R2,0,0],[0,0,-R2,0]]];
+const ang=(s,k)=>{const[x,y,z]=bloch(s,k).v,[r,t,p]=sph(x,y,z);return r<1e-8?['—','—']:[fa(t*PI/180),fa(p*PI/180)]};
+const WT=[["Observations",["S.No","θ (rad / π)","φ (rad / π)","State |ψ⟩","Norm ⟨ψ|ψ⟩","Remarks / special observations"]],["X, Y and Z gates",["S.No","θ (rad / π)","φ (rad / π)","|ψ⟩","X|ψ⟩","Y|ψ⟩","Z|ψ⟩"]],["Hadamard gate",["S.No","θ (rad / π)","φ (rad / π)","|ψ⟩","H|ψ⟩"]],["Two-qubit Bloch coordinates",["S.No","Two-qubit state |ψ⟩","θ₁ (rad / π)","φ₁ (rad / π)","θ₂ (rad / π)","φ₂ (rad / π)"]],["CNOT and SWAP gates",["S.No","|ψ⟩","CNOT|ψ⟩","SWAP|ψ⟩"]]];
+function wsRows(){const a=[[],[],[],[],[]];WS1.forEach(([l,[a0,a1],[b0,b1],rm],i)=>{const s=mk([a0,b0],[a1,b1]),[t,p]=ang(s,0),e=expr(s);
+ a[0].push([i+1,t,p,e,'1.000000',rm]);a[1].push([i+1,t,p,e,expr(ap1(s,GT.X,0)),expr(ap1(s,GT.Y,0)),expr(ap1(s,GT.Z,0))]);a[2].push([i+1,t,p,e,expr(ap1(s,GT.H,0))])});
+ WS2.forEach(([l,r,m],i)=>{const s=mk(r.length==4&&m?[r[0],r[1],r[2],r[3]]:r,m||[0,0,0,0]),[t1,p1]=ang(s,0),[t2,p2]=ang(s,1);a[3].push([i+1,l,t1,p1,t2,p2]);a[4].push([i+1,expr(s),expr(ap2(s,'CNOT')),expr(ap2(s,'SWAP'))])});return a}
+/* ---------- canvas ---------- */
+const cv=$('#cv'),cx=cv.getContext('2d');let W=0,Rr=0;
+const size=()=>{const d=devicePixelRatio||1,w=cv.clientWidth;cv.width=cv.height=w*d;cx.setTransform(d,0,0,d,0,0);W=w;Rr=w*.33};addEventListener('resize',size);
+function P(x,y,z){const cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch),rx=x*cy-y*sy,ry=x*sy+y*cy,k=Rr*zoom;return[W/2+rx*k,W/2-(ry*sp+z*cp)*k,ry*cp-z*sp]}
+const fd=d=>Math.max(.12,Math.min(1,.55-d*.45));
+function poly(pts,c,lw,ba){cx.strokeStyle=c;cx.lineWidth=lw;for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];cx.globalAlpha=ba*fd((a[2]+b[2])/2);cx.beginPath();cx.moveTo(a[0],a[1]);cx.lineTo(b[0],b[1]);cx.stroke()}cx.globalAlpha=1}
+function lbl(t,p,c,sz=14){const q=P(...p);cx.globalAlpha=fd(q[2]);cx.fillStyle=c;cx.font=`600 ${sz}px 'Instrument Sans',sans-serif`;cx.textAlign='center';cx.textBaseline='middle';cx.fillText(t,q[0],q[1]);cx.globalAlpha=1}
+const rg=f=>Array.from({length:73},(_,i)=>P(...f(i/72*PI*2)));
+function draw(now){cx.clearRect(0,0,W,W);const k=Rr*zoom,tx=T[1],bd=T[3],ac=T[5];
+ const gr=cx.createRadialGradient(W/2-k*.3,W/2-k*.35,k*.1,W/2,W/2,k);gr.addColorStop(0,ac+'44');gr.addColorStop(1,ac+'0f');cx.fillStyle=gr;cx.beginPath();cx.arc(W/2,W/2,k,0,7);cx.fill();cx.strokeStyle=ac+'66';cx.lineWidth=1.2;cx.stroke();
+ for(const la of[-60,-30,30,60]){const l=la*PI/180;poly(rg(t=>[Math.cos(l)*Math.cos(t),Math.cos(l)*Math.sin(t),Math.sin(l)]),bd,.8,.8)}
+ for(let m=0;m<180;m+=30){const l=m*PI/180;poly(rg(t=>[Math.cos(l)*Math.sin(t),Math.sin(l)*Math.sin(t),Math.cos(t)]),bd,.8,.8)}
+ poly(rg(t=>[Math.cos(t),Math.sin(t),0]),ac,1.6,.95);
+ [[1,0,0,'#c95f5f'],[0,1,0,'#4baf83'],[0,0,1,'#568bc4']].forEach(([a,b,c,col])=>poly([P(-a*1.15,-b*1.15,-c*1.15),P(0,0,0),P(a*1.15,b*1.15,c*1.15)],col,1.4,.9));
+ [['|0⟩',[0,0,1.3]],['|1⟩',[0,0,-1.3]],['|+⟩',[1.3,0,0]],['|−⟩',[-1.3,0,0]],['|+i⟩',[0,1.32,0]],['|−i⟩',[0,-1.32,0]]].forEach(([t,p])=>lbl(t,p,tx));
+ lbl('X',[1.55,0,0],'#c95f5f',13);lbl('Y',[0,1.55,0],'#4baf83',13);lbl('Z',[0,0,1.5],'#568bc4',13);
+ const[x,y,z]=cur,r=Math.hypot(x,y,z),col=r>.999?ac:'#ff9f43';
+ cx.lineCap='round';for(let i=1;i<trail.length;i++){const a=P(...trail[i-1]),b=P(...trail[i]);cx.globalAlpha=i/trail.length*.6;cx.strokeStyle=col;cx.lineWidth=2+i/trail.length*3;cx.beginPath();cx.moveTo(a[0],a[1]);cx.lineTo(b[0],b[1]);cx.stroke()}cx.globalAlpha=1;
+ const o=P(0,0,0),t=P(x,y,z),f=P(x,y,0);cx.setLineDash([3,5]);cx.strokeStyle=col+'99';cx.lineWidth=1;cx.beginPath();cx.moveTo(o[0],o[1]);cx.lineTo(f[0],f[1]);cx.lineTo(t[0],t[1]);cx.stroke();cx.setLineDash([]);
+ cx.shadowColor=col;cx.shadowBlur=16;cx.strokeStyle=col;cx.lineWidth=3.5;cx.beginPath();cx.moveTo(o[0],o[1]);cx.lineTo(t[0],t[1]);cx.stroke();cx.fillStyle=col;cx.beginPath();cx.arc(t[0],t[1],6.5,0,7);cx.fill();cx.shadowBlur=0;
+ if(!$('#rm').checked&&!frozen){const q=(now/1400)%1;cx.globalAlpha=(1-q)*.7;cx.lineWidth=2;cx.beginPath();cx.arc(t[0],t[1],7+q*20,0,7);cx.stroke();cx.globalAlpha=1}}
+function slerp(a,b,s){const ra=Math.hypot(...a),rb=Math.hypot(...b),r=ra+(rb-ra)*s;if(ra<1e-9||rb<1e-9)return a.map((v,i)=>v+(b[i]-v)*s);
+ const u=a.map(v=>v/ra),w=b.map(v=>v/rb),om=Math.acos(Math.max(-1,Math.min(1,u[0]*w[0]+u[1]*w[1]+u[2]*w[2])));if(om<1e-9)return w.map(v=>v*r);
+ if(PI-om<1e-6){let p=Math.abs(u[0])<.9?[0,-u[2],u[1]]:[u[2],0,-u[0]];const m=Math.hypot(...p);return u.map((v,i)=>(v*Math.cos(PI*s)+p[i]/m*Math.sin(PI*s))*r)}
+ return u.map((v,i)=>(Math.sin((1-s)*om)*v+Math.sin(s*om)*w[i])/Math.sin(om)*r)}
+function frame(now){if(anim){const t=Math.min(1,(now-anim.t0)/anim.d),s=t*t*(3-2*t);cur=slerp(anim.a,anim.b,s);trail.push(cur.slice());if(t>=1){anim=null;cur=tv.slice()}}else if(trail.length)trail.shift();
+ if(trail.length>40)trail.shift();if(!drag&&!$('#rm').checked&&!frozen)yaw+=.0016;draw(now);requestAnimationFrame(frame)}
+function setFrozen(f){frozen=f;$('#ao').checked=!f;const b=$('#fz');b.textContent=f?'▶ Resume animation':'⏸ Stop animation';b.classList.toggle('off',!!f);if(f&&anim){cur=tv.slice();anim=null;trail=[]}toast(f?'Animation stopped':'Animation resumed')}
+function go(v){tv=v;const d=Math.hypot(v[0]-cur[0],v[1]-cur[1],v[2]-cur[2]);if(!$('#ao').checked||$('#rm').checked||d<1e-6){cur=v.slice();anim=null;trail=[];return}
+ anim={a:cur.slice(),b:v,t0:performance.now(),d:SPD[$('#sd').value]*16*Math.max(.5,Math.min(1.5,d/1.5))}}
+/* ---------- UI ---------- */
+let tt;const toast=m=>{const t=$('#ts');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)};
+const err=m=>$('#us').innerHTML=`<span style="color:#e8726f">⚠ ${m}</span>`,ok=m=>$('#us').innerHTML=`<span style="color:var(--accent)">${m}</span>`;
+const opts=(el,n,v)=>{el.innerHTML=Array.from({length:n},(_,k)=>`<option value="${k}">Q${k}</option>`).join('');el.value=Math.min(v,n-1)};
+function fillTable(){const L=lab(S.n);$('#at').innerHTML=L.map((l,i)=>`<tr><td>|${l}⟩</td><td><input type="text" data-i="${i}" value="${fc(S.re[i],S.im[i])}"></td></tr>`).join('');$('#sp').value=S.n;
+ opts($('#qs'),S.n,sel);opts($('#tg'),S.n,$('#tg').value|0);opts($('#ct'),S.n,0);if(S.n==1){$('#al').value=fc(S.re[0],S.im[0]);$('#be').value=fc(S.re[1],S.im[1])}}
+function applyRaw(r,i){let nm=0;try{S=mk(r,i);nm=0}catch(e){return err(e.message)}
+ const raw=Math.hypot(...r.map((v,k)=>Math.hypot(v,i[k])));$('#nl').textContent=`Input norm = ${raw.toFixed(6)}  (factor 1/${raw.toFixed(6)})`;
+ if(Math.abs(raw-1)>5e-4)err(`State not normalized (norm ${raw.toFixed(6)}); displaying the normalized state. Click Normalize State to rewrite the inputs.`);else ok('State valid ✓');sel=Math.min(sel,S.n-1);update()}
+function singleEdit(){try{const a=pc($('#al').value),b=pc($('#be').value);if(S.n!=1){S=basis(1);fillTable()}applyRaw([a[0],b[0]],[a[1],b[1]]);$('#at').querySelectorAll('input').forEach((e,i)=>e.value=fc(S.re[i],S.im[i]))}catch(e){err(e.message)}}
+function tableEdit(){try{const v=[...$('#at').querySelectorAll('input')].map(e=>pc(e.value));applyRaw(v.map(x=>x[0]),v.map(x=>x[1]))}catch(e){err(e.message)}}
+function setMode(m){document.querySelectorAll('#mt button').forEach((b,i)=>b.classList.toggle('on',i==m));$('#m0').classList.toggle('on',m==0);$('#m1').classList.toggle('on',m==1);m==0?singleEdit():fillTable()}
+function update(){const N=1<<S.n,L=lab(S.n),b=bloch(S,sel),[x,y,z]=b.v,Pr=P2(S);pur=b.p;go(b.v);
+ if(N<=4096)$('#sv').innerHTML=L.map((l,i)=>`<tr><td>|${l}⟩</td><td>${S.re[i].toFixed(6)}</td><td>${S.im[i].toFixed(6)}</td><td>${Math.hypot(S.re[i],S.im[i]).toFixed(6)}</td><td>${Pr[i].toFixed(6)}</td></tr>`).join('');
+ const r=b.rho,f=(a,c)=>`${a>=0?'+':''}${a.toFixed(4)}${c>=0?'+':''}${c.toFixed(4)}i`;
+ $('#dm').innerHTML=`<p style="margin-bottom:10px">Reduced density matrix of Q${sel}</p><div class="dm"><div>${f(r[0],0)}</div><div>${f(r[1],r[2])}</div><div>${f(r[1],-r[2])}</div><div>${f(r[3],0)}</div></div><p style="margin-top:12px">Tr(ρ²) = ${b.p.toFixed(6)}</p>`;
+ let ix=Array.from({length:N},(_,i)=>i);if(N>16)ix.sort((a,c)=>Pr[c]-Pr[a]);ix=ix.slice(0,64).filter(i=>N<=16||Pr[i]>=1e-12);
+ $('#pb').innerHTML=ix.map(i=>`<div class="pb"><span>|${L[i]}⟩</span><i><b style="--w:${Pr[i]*100}%;background:hsl(${(Math.atan2(S.im[i],S.re[i])*180/PI+360)%360} 75% 66%)"></b></i><em>${(Pr[i]*100).toFixed(2)}%</em></div>`).join('')+(N>16?`<p style="color:var(--accent)">Showing the largest ${ix.length} of ${N} basis states. Bar colour = phase.</p>`:'');
+ $('#bc').innerHTML=Array.from({length:S.n},(_,k)=>{const q=bloch(S,k);return`<tr><td>Q${k}</td>${q.v.map(v=>`<td>${(v>=0?'+':'')+v.toFixed(6)}</td>`).join('')}<td>${Math.hypot(...q.v).toFixed(6)}</td><td>${q.p.toFixed(6)}</td></tr>`}).join('');
+ gcalc();const[rr,th,ph]=sph(x,y,z),a=Math.cos(th*PI/360),bm=Math.sin(th*PI/360),p=ph*PI/180,pure=b.p>1-1e-9;
+ $('#kv').innerHTML=[['Qubit','Q'+sel],['X',(x>=0?'+':'')+x.toFixed(6)],['Y',(y>=0?'+':'')+y.toFixed(6)],['Z',(z>=0?'+':'')+z.toFixed(6)],['|r|',rr.toFixed(6)],['θ',`${th.toFixed(3)}° (${pif(th*PI/180)})`],['φ',`${ph.toFixed(3)}° (${pif(p)})`],['Tr(ρ²)',b.p.toFixed(6)],['Purity',pure?'pure':'mixed']].map(([k,v])=>`<span>${k}</span><span>${v}</span>`).join('');
+ $('#sn').innerHTML=pure?`|ψ⟩ = ${a.toFixed(5)}|0⟩ + (${(bm*Math.cos(p)).toFixed(5)}${bm*Math.sin(p)<0?'-':'+'}${Math.abs(bm*Math.sin(p)).toFixed(5)}i)|1⟩`:'ρ is mixed — no single |ψ⟩ describes this qubit';
+ $('#inf').innerHTML=rr<1e-6?'Mixed reduced state. The Bloch vector lies at the <b>center</b> because this qubit is entangled/correlated with the remaining system (maximally mixed, ρ = I/2).':rr<1-1e-6?'Mixed reduced state. The Bloch vector lies <b>inside</b> the sphere because this qubit is entangled/correlated with the remaining system.':'Pure reduced state: the vector lies on the sphere surface (purity = 1).'}
+function gcalc(){const t=$('#tg').value|0,o=['SINGLE-QUBIT GATE CALCULATIONS',`Input: |ψ⟩ = ${expr(S)}`,`Target: Q${t}  (Q0 is the leftmost bit)`,''];
+ for(const n of['X','Y','Z','H']){const U=GT[n],rs=ap1(S,U,t);o.push(`${n}|ψ⟩  =  U_${n}(Q${t}) |ψ⟩`,`U_${n} = [${fc(U[0],U[1],4)}  ${fc(U[2],U[3],4)}]  [${fc(U[4],U[5],4)}  ${fc(U[6],U[7],4)}]`,`Result: ${expr(rs)}`,'')}$('#gc').textContent=o.join('\n')}
+function ws(){const R=wsRows();$('#wp').innerHTML=WT.map(([n,h],t)=>`<div class="pane ${t==0?'on':''}" data-w="${t}"><p style="margin-bottom:8px;color:var(--accent)">Click any cell to enter your own value. Calculated values are used as the starting point.</p><div class="scr"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${R[t].map((r,i)=>`<tr>${r.map((c,j)=>`<td contenteditable data-k="${t}.${i}.${j}" style="white-space:pre-wrap">${ov[`${t}.${i}.${j}`]??c}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`).join('');
+ $('#wt').innerHTML=WT.map(([n],i)=>`<button class="${i?'':'on'}" data-w="${i}">${n}</button>`).join('')}
+/* ---------- actions ---------- */
+function applyGate(n){try{const U=GT[n]||RT[n](pa($('#an').value));S=ap1(S,U,$('#tg').value|0);fillTable();toast(`Applied ${n} on Q${$('#tg').value}`);ok(`Applied ${n} on Q${$('#tg').value}.`);update()}catch(e){err(e.message)}}
+function two(n){try{const c=+$('#ct').value,t=+$('#tg').value;S=ap2(S,n,c,t);fillTable();toast(`${n} (control Q${c}, target Q${t})`);update()}catch(e){err(e.message)}}
+const dl=(n,d,m)=>{const a=document.createElement('a');a.href=URL.createObjectURL(d instanceof Blob?d:new Blob([d],{type:m}));a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),999)};
+const stJSON=()=>({num_qubits:S.n,state:Array.from(S.re,(r,i)=>fc(r,S.im[i],10))});
+function exportData(csv){const L=lab(S.n),Pr=P2(S);if(csv){let o='basis,real,imag,magnitude,probability\n'+L.map((l,i)=>[l,S.re[i],S.im[i],Math.hypot(S.re[i],S.im[i]),Pr[i]].join(',')).join('\n')+'\n\nqubit,x,y,z,purity\n';for(let k=0;k<S.n;k++){const q=bloch(S,k);o+=[k,...q.v,q.p].join(',')+'\n'}dl('state_data.csv',o,'text/csv')}
+ else{const d=stJSON();d.probabilities=Object.fromEntries(L.map((l,i)=>[l,Pr[i]]));d.bloch={};for(let k=0;k<S.n;k++){const q=bloch(S,k);d.bloch['Q'+k]={xyz:q.v,purity:q.p}}dl('state_data.json',JSON.stringify(d,null,4),'application/json')}toast('Exported')}
+function exportWS(){const q=s=>`"${String(s).replace(/"/g,'""')}"`;let o='';document.querySelectorAll('#wp .pane').forEach((p,t)=>{o+=q(WT[t][0])+'\n'+WT[t][1].map(q).join(',')+'\n';p.querySelectorAll('tbody tr').forEach(r=>o+=[...r.children].map(c=>q(c.textContent)).join(',')+'\n');o+='\n'});dl('quantum_worksheet.csv',o,'text/csv');toast('Worksheet exported')}
+function selfChecks(){const z=[0,0,1],o=[0,0,0],T4=[["2-qubit |00>",basis(2,0),[z,z]],["2-qubit Bell",preset0('Bell'),[o,o]],["3-qubit GHZ",preset0('GHZ',3),[o,o,o]],["3-qubit W",preset0('W',3),[[0,0,1/3],[0,0,1/3],[0,0,1/3]]]];
+ const el=$('#sc');el.style.display='block';el.textContent=T4.map(([n,s,e])=>`${e.every((v,k)=>bloch(s,k).v.every((c,i)=>Math.abs(c-v[i])<1e-9))?'PASS':'FAIL'}  ${n}`).join('\n')}
+function preset0(n,q){const k=S;S={n:q||2};try{return preset(n)}finally{S=k}}
+/* ---------- init ---------- */
+function setTheme(n){T=TH[n];['page','text','field','border','card','accent','sel','head'].forEach((k,i)=>document.documentElement.style.setProperty('--'+k,T[i]))}
+$('#th').innerHTML=Object.keys(TH).map(n=>`<option ${n=='Warm Paper'?'selected':''}>${n}</option>`).join('');
+$('#pr').innerHTML=[...Object.keys(SG),'Random','Bell State','GHZ State','W State','Custom'].map(n=>`<button data-p="${n}">${n}</button>`).join('');
+$('#gb').innerHTML=['X','Y','Z','H','S','T','Rx','Ry','Rz','CNOT','SWAP'].map(n=>`<button data-g="${n}" style="min-width:52px;font-weight:600">${n}</button>`).join('');
+$('#ab').innerHTML=[['Reset View','rv'],['Save State','sv'],['Load State','ld'],['Export Data (JSON)','ej'],['Export Data (CSV)','ec'],['Export Bloch Sphere PNG','ep'],['Export Worksheet CSV','ew'],['Run Self-Checks','sc']].map(([t,a])=>`<button data-a="${a}">${t}</button>`).join('');
+$('#bt').innerHTML=['State Vector','Density Matrix','Probabilities','Bloch Coordinates','Gate Calculations','Lab Worksheet','Controls'].map((t,i)=>`<button class="${i?'':'on'}" data-t="${i}">${t}</button>`).join('');
+$('#rm').checked=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;b.classList.remove('fired');void b.offsetWidth;b.classList.add('fired');
+ if(d.m!=null)setMode(+d.m);
+ else if(d.t!=null){document.querySelectorAll('#bt button').forEach(x=>x.classList.toggle('on',x==b));document.querySelectorAll('[id^=t]').forEach(p=>p.classList.contains('pane')&&p.classList.toggle('on',p.id=='t'+d.t))}
+ else if(d.w!=null){document.querySelectorAll('#wt button').forEach(x=>x.classList.toggle('on',x==b));document.querySelectorAll('#wp .pane').forEach(p=>p.classList.toggle('on',p.dataset.w==d.w))}
+ else if(d.p){if(d.p=='Custom'){setMode(1);return ok('Edit amplitudes freely, then press Normalize if needed.')}const n=d.p.replace(' State','');try{S=preset(n);sel=Math.min(sel,S.n-1);fillTable();$('#nl').textContent='Norm = 1.000000';ok(`Preset ${d.p} loaded.`);update()}catch(x){err(x.message)}}
+ else if(d.g){['CNOT','SWAP'].includes(d.g)?two(d.g):applyGate(d.g)}
+ else if(b.id=='fz')setFrozen(!frozen);
+ else if(b.id=='nb'){fillTable();$('#nl').textContent='Norm = 1.000000';ok('State normalized ✓')}
+ else if(d.a=='rv'){yaw=-.9;pitch=.4;zoom=1}
+ else if(d.a=='sv')dl('state.json',JSON.stringify(stJSON(),null,4),'application/json');
+ else if(d.a=='ld')$('#lf').click();
+ else if(d.a=='ej')exportData(0);else if(d.a=='ec')exportData(1);
+ else if(d.a=='ep')cv.toBlob(x=>dl('bloch_sphere.png',x));
+ else if(d.a=='ew')exportWS();else if(d.a=='sc')selfChecks()});
+$('#lf').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text()),a=j.state.map(pc),n=+j.num_qubits;if(a.length!=2**n)throw new SE(`Expected ${2**n} amplitudes for a ${n}-qubit system, found ${a.length}.`);S=mk(a.map(x=>x[0]),a.map(x=>x[1]));sel=0;fillTable();ok('Loaded '+e.target.files[0].name);update()}catch(x){err(x instanceof SE?x.message:'Could not read state file: '+x.message)}e.target.value=''};
+$('#ao').onchange=e=>setFrozen(!e.target.checked);
+$('#al').oninput=$('#be').oninput=singleEdit;
+$('#at').addEventListener('input',()=>{clearTimeout(debT);debT=setTimeout(tableEdit,180)});
+$('#sp').onchange=e=>{const n=Math.max(1,Math.min(MAXQ,+e.target.value||1));S=basis(n);sel=0;fillTable();ok(`${n} qubit(s): ${2**n} amplitude fields.`);update()};
+$('#qs').onchange=e=>{sel=+e.target.value;$('#tg').value=sel;update()};$('#tg').onchange=gcalc;
+$('#th').onchange=e=>{setTheme(e.target.value);toast('Theme: '+e.target.value)};
+$('#wp').addEventListener('input',e=>{if(e.target.dataset.k)ov[e.target.dataset.k]=e.target.textContent});
+let px,py;cv.onpointerdown=e=>{drag=1;px=e.clientX;py=e.clientY;cv.setPointerCapture(e.pointerId)};
+cv.onpointermove=e=>{if(!drag)return;yaw+=(e.clientX-px)*.008;pitch=Math.max(-1.4,Math.min(1.4,pitch+(e.clientY-py)*.008));px=e.clientX;py=e.clientY};cv.onpointerup=cv.onpointercancel=()=>drag=0;
+cv.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.6,Math.min(3.5,zoom*(e.deltaY<0?1.1:1/1.1)))},{passive:false});
+setTheme('Warm Paper');S=basis(1);ws();fillTable();size();update();requestAnimationFrame(frame);
+</script></body></html>
